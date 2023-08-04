@@ -20,6 +20,9 @@
 	},
 	"main": "./dist/diff-review.umd.cjs",
 	"module": "./dist/diff-review.js",
+	"bin": {
+		"diff-review": "./bin/diff-review.js"
+	},
 	"files": [
 		"bin/",
 		"lib/",
