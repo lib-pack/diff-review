@@ -34,6 +34,7 @@ export default defineConfig({
 			reporter: ["html", "lcov"],
 		},
 		exclude: ["lib", "node_modules"],
+		globals: true,
 		setupFiles: ["console-fail-test/setup"],
 	},
 });
