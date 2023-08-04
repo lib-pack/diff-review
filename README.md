@@ -29,13 +29,60 @@
 ## Usage
 
 ```shell
-npm i diff-review
+pnpm i -g diff-review
 ```
 
-```ts
-import { greet } from "diff-review";
+### CLI
 
-greet("Hello, world!");
+```
+diff-review set openai_token xxxxxx
+diff-review set openai_url https://xxxx
+diff-review
+```
+
+```
+/a/x/1.js
+  source: let a=111;
+
+```
+
+### API
+
+```ts
+import { diffReview } from "diff-review";
+
+console.log(await diffReview("develop", "main"));
+// Result
+```
+
+```json
+{
+	"diff": {
+		"/a/x/1.js": [
+			{
+				"block": "{ xx }",
+				"includes": ["xx"],
+				"pos": {
+					"end": "1102:11",
+					"start": "1101:11"
+				},
+				"result": [
+					{
+						"message": "xxxx",
+						"type": "eslint"
+					},
+					{
+						"message": "xxxx",
+						"type": "gpt"
+					}
+				]
+			}
+		]
+	},
+	"source": "main",
+	"target": "feat/a",
+	"version": "1"
+}
 ```
 
 ## Development
