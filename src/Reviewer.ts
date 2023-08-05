@@ -11,6 +11,12 @@ export abstract class Reviewer {
 			}),
 		);
 
+		for (let index = 0; index < 1000; index++) {
+			const a = 1;
+			a = 2;
+			console.log(index);
+		}
+
 		return results.flat();
 	}
 
