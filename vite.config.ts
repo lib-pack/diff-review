@@ -23,6 +23,7 @@ export default defineConfig({
 		// 		},
 		// 	},
 		// },
+		sourcemap: true,
 	},
 	test: {
 		clearMocks: true,
@@ -36,5 +37,6 @@ export default defineConfig({
 		exclude: ["lib", "node_modules"],
 		globals: true,
 		setupFiles: ["console-fail-test/setup"],
+		testTimeout: 20000,
 	},
 });

@@ -48,6 +48,9 @@
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
+		"gitlog": "^4.0.8",
+		"openai": "^3.3.0",
+		"simple-git": "^3.19.1",
 		"vite": "^4.4.8"
 	},
 	"devDependencies": {
