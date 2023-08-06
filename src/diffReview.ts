@@ -1,10 +1,11 @@
-import { Reviewer } from "./Reviewer";
+import { ReviewResult, Reviewer } from "./Reviewer";
 import { AiReviewer } from "./reviewer/AiReviewer";
 import { ESLintReviewer } from "./reviewer/ESLintReviewer";
 import { Gpt } from "./reviewer/Gpt";
+import { Options } from "./types";
 
 export function diffReview(current: string, target: string, options: Options) {
-	Reviewer.register(new ESLintReviewer());
+	Reviewer.register(new ESLintReviewer(options.eslintReviewer));
 
 	if (options.aiReviewer && options.aiReviewer.enabled !== false) {
 		Reviewer.register(
@@ -14,13 +15,19 @@ export function diffReview(current: string, target: string, options: Options) {
 		);
 	}
 
-	return Reviewer.review(current, target);
+	return Reviewer.review(current, target, {
+		cwd: options.cwd ?? process.cwd(),
+	});
 }
 
-export interface Options {
-	aiReviewer?: {
-		apiKey: string;
-		basePath: string;
-		enabled?: boolean;
-	};
+// 格式化输出为Md
+export function formatReviewResult(
+	result: ReviewResult[],
+	options?: any,
+): string {
+	const formatted = result.map((r) => {
+		return `## ${r.reviewer.constructor.name}\n\n${r.message}`;
+	});
+
+	return formatted.join("\n");
 }

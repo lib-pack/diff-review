@@ -1,6 +1,6 @@
 import simpleGit from "simple-git";
 
-import { Reviewer } from "../Reviewer";
+import { ReviewContext, ReviewResult, Reviewer } from "../Reviewer";
 import { Gpt } from "./Gpt";
 
 export class AiReviewer extends Reviewer {
@@ -8,12 +8,17 @@ export class AiReviewer extends Reviewer {
 		super();
 	}
 
-	async review(source: string, target: string) {
+	async review(
+		ctx: ReviewContext,
+		source: string,
+		target: string,
+	): Promise<ReviewResult> {
 		const input = await simpleGit().diff([source, target]);
 		const message = await this.gpt.run(input);
 		return {
 			input,
 			message: message ?? "",
+			reviewer: this,
 		};
 	}
 }

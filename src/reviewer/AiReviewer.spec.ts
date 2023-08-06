@@ -9,7 +9,11 @@ describe("AiReviewer.ts", () => {
 		);
 		const aiReview = new AiReviewer(gpt);
 
-		const result = await aiReview.review("test/b1", "test/b2");
+		const result = await aiReview.review(
+			{ index: 0, results: [] },
+			"test/b1",
+			"test/b2",
+		);
 
 		console.log(result);
 
