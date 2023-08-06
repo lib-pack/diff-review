@@ -9,9 +9,7 @@ export function diffReview(current: string, target: string, options: Options) {
 
 	if (options.aiReviewer && options.aiReviewer.enabled !== false) {
 		Reviewer.register(
-			new AiReviewer(
-				new Gpt(options.aiReviewer.apiKey, options.aiReviewer.basePath),
-			),
+			new AiReviewer(new Gpt(options.aiReviewer.token, options.aiReviewer.api)),
 		);
 	}
 
