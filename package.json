@@ -34,7 +34,7 @@
 		"build": "vite build",
 		"format": "prettier \"**/*\" --ignore-unknown",
 		"format:write": "pnpm format --write",
-		"lint": "eslint . .*js --max-warnings 0 --report-unused-disable-directives",
+		"lint": "eslint . --max-warnings 0 --report-unused-disable-directives",
 		"lint:knip": "knip",
 		"lint:md": "markdownlint \"**/*.md\" \".github/**/*.md\" --rules sentences-per-line",
 		"lint:package": "npmPkgJsonLint .",
@@ -48,13 +48,16 @@
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
+		"cosmiconfig": "^8.2.0",
 		"gitlog": "^4.0.8",
+		"lodash.merge": "^4.6.2",
 		"openai": "^3.3.0",
 		"simple-git": "^3.19.1",
 		"vite": "^4.4.8"
 	},
 	"devDependencies": {
 		"@types/eslint": "^8.37.0",
+		"@types/lodash.merge": "^4.6.7",
 		"@types/node": "^20.4.8",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
