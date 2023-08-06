@@ -8,4 +8,5 @@ export interface Options {
 	};
 	cwd?: string;
 	eslintReviewer?: ESLint.Options;
+	patter?: string[];
 }

@@ -10,9 +10,10 @@ describe("AiReviewer.ts", () => {
 			{ index: 0, results: [] },
 			"test/b1",
 			"test/b2",
+			{ cwd: process.cwd() },
 		);
 
-		console.log(result);
+		// console.log(result);
 
 		expect(result.message).toString();
 	});

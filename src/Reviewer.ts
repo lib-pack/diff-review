@@ -19,9 +19,22 @@ export abstract class Reviewer {
 		const results: ReviewResult[] = [];
 		for (let i = 0; i < Reviewer.reviewers.length; i++) {
 			const reviewer = Reviewer.reviewers[i];
-			results.push(
-				await reviewer.review({ index: i, results }, source, target, options),
-			);
+
+			await reviewer
+				.review({ index: i, results }, source, target, options)
+				.then((result) => {
+					result.status = "success";
+					results.push(result);
+				})
+				.catch((e) => {
+					const result: ReviewResult = {
+						status: "fail",
+						input: "",
+						message: e.message,
+						reviewer,
+					};
+					results.push(result);
+				});
 		}
 
 		return results;
@@ -39,10 +52,12 @@ export interface ReviewResult {
 	input: string;
 	message: string;
 	reviewer: Reviewer;
+	status?: "fail" | "success";
 }
 
 export interface ReviewOptions {
 	cwd: string;
+	patter?: string[];
 }
 
 export interface ReviewContext {

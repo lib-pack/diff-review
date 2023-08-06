@@ -4,7 +4,8 @@ import { ESLintReviewer } from "./reviewer/ESLintReviewer";
 import { Gpt } from "./reviewer/Gpt";
 import { Options } from "./types";
 
-export function diffReview(current: string, target: string, options: Options) {
+export async function diffReview(target: string, options: Options) {
+	const current: string = await getCurrentBranch(options.cwd ?? process.cwd());
 	Reviewer.register(new ESLintReviewer(options.eslintReviewer));
 
 	if (options.aiReviewer && options.aiReviewer.enabled !== false) {
@@ -13,8 +14,9 @@ export function diffReview(current: string, target: string, options: Options) {
 		);
 	}
 
-	return Reviewer.review(current, target, {
+	return await Reviewer.review(current, target, {
 		cwd: options.cwd ?? process.cwd(),
+		patter: options.patter,
 	});
 }
 
@@ -23,9 +25,17 @@ export function formatReviewResult(
 	result: ReviewResult[],
 	options?: any,
 ): string {
-	const formatted = result.map((r) => {
-		return `## ${r.reviewer.constructor.name}\n\n${r.message}`;
-	});
+	const formatted = result
+		.filter((r) => r.status === "success")
+		.map((r) => {
+			return `## ${r.reviewer.constructor.name}\n\n${r.message}`;
+		});
 
-	return formatted.join("\n");
+	return formatted.join("\n\n");
+}
+
+function getCurrentBranch(cwd: string) {
+	return require("simple-git")(cwd)
+		.branchLocal()
+		.then((r: any) => r.current);
 }

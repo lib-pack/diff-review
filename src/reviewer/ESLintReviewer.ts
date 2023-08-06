@@ -1,6 +1,7 @@
 import { ESLint } from "eslint";
 import { gitlogPromise } from "gitlog";
 import merge from "lodash.merge";
+import { isMatch } from "matcher";
 import { join } from "path";
 
 import {
@@ -18,10 +19,8 @@ export class ESLintReviewer extends Reviewer {
 		ctx: ReviewContext,
 		source: string,
 		target: string,
-		options: ReviewOptions,
+		{ cwd, patter = ["*"] }: ReviewOptions,
 	): Promise<ReviewResult> {
-		const cwd = options.cwd;
-
 		const eslint = new ESLint(
 			merge(
 				{
@@ -47,9 +46,11 @@ export class ESLintReviewer extends Reviewer {
 		});
 		// console.log(commits);
 
-		const matchFile: string[] = commits.flatMap((commit) =>
-			commit.files.map((file) => join(cwd, file)),
-		);
+		const matchFile: string[] = commits
+			.flatMap((commit) => commit.files.map((file) => join(cwd, file)))
+			.filter((file) => isMatch(file, patter));
+
+		// console.log(matchFile);
 
 		const input: string[] = [];
 		for (let i = 0; i < matchFile.length; i++) {
