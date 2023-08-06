@@ -50,9 +50,12 @@
 	"dependencies": {
 		"cosmiconfig": "^8.2.0",
 		"gitlog": "^4.0.8",
+		"glob": "^10.3.3",
 		"lodash.merge": "^4.6.2",
+		"matcher": "^5.0.0",
 		"openai": "^3.3.0",
 		"simple-git": "^3.19.1",
+		"throat": "^6.0.2",
 		"vite": "^4.4.8"
 	},
 	"devDependencies": {
