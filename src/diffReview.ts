@@ -29,7 +29,7 @@ export function formatReviewResult(
 	const formatted = result
 		.filter((r) => r.status === "success")
 		.map((r) => {
-			return `## ${r.reviewer.constructor.name}\n\n${r.message}`;
+			return `## ${r.reviewer.constructor.name}\n\n${r.message}:`;
 		});
 
 	return formatted.join("\n\n");

@@ -49,7 +49,7 @@ export class AiReviewer extends Reviewer {
 						const diff = await simpleGit().diff([source, target, file]);
 						input += diff + "\n";
 						const result = await this.gpt.run(diff);
-						message += `**${file}**\n\n${result}` + "\n\n";
+						message += `* **${file}**\n\n${result}` + "\n\n";
 						// console.log(file, result);
 					} catch (error) {}
 				}),
