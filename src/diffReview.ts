@@ -1,3 +1,5 @@
+import { simpleGit } from "simple-git";
+
 import { ReviewResult, Reviewer } from "./Reviewer";
 import { AiReviewer } from "./reviewer/AiReviewer";
 import { ESLintReviewer } from "./reviewer/ESLintReviewer";
@@ -35,7 +37,7 @@ export function formatReviewResult(
 }
 
 function getCurrentBranch(cwd: string) {
-	return require("simple-git")(cwd)
+	return simpleGit(cwd)
 		.branchLocal()
 		.then((r: any) => r.current);
 }

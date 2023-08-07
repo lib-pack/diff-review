@@ -30,7 +30,7 @@ export abstract class Reviewer {
 					const result: ReviewResult = {
 						status: "fail",
 						input: "",
-						message: e.message,
+						message: String(e),
 						reviewer,
 					};
 					results.push(result);

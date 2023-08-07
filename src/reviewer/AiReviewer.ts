@@ -1,6 +1,5 @@
 import { gitlogPromise } from "gitlog";
 import { isMatch } from "matcher";
-import { join } from "path";
 import simpleGit from "simple-git";
 import throat from "throat";
 
