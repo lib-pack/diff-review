@@ -32,5 +32,5 @@ export function formatReviewResult(
 			return `## ${r.reviewer.constructor.name}\n\n${r.message}:`;
 		});
 
-	return formatted.join("\n\n");
+	return formatted.join("\n ---\n");
 }
