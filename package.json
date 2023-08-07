@@ -1,6 +1,6 @@
 {
 	"name": "diff-review",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "a code diff review tools!!!",
 	"repository": {
 		"type": "git",
