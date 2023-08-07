@@ -14,12 +14,13 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"import": "./dist/diff-review.js",
-			"require": "./dist/diff-review.umd.cjs"
+			"import": "./lib/diff-review.js",
+			"require": "./lib/diff-review.cjs"
 		}
 	},
-	"main": "./dist/diff-review.umd.cjs",
-	"module": "./dist/diff-review.js",
+	"main": "./lib/diff-review.cjs",
+	"module": "./lib/diff-review.js",
+	"types": "./lib/src/index.d.ts",
 	"bin": {
 		"diff-review": "./bin/diff-review.js"
 	},
@@ -32,6 +33,7 @@
 	],
 	"scripts": {
 		"build": "vite build",
+		"diff-review": "node bin/index.js",
 		"format": "prettier \"**/*\" --ignore-unknown",
 		"format:write": "pnpm format --write",
 		"lint": "eslint . --max-warnings 0 --report-unused-disable-directives",
@@ -48,6 +50,8 @@
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
+		"@liuli-util/vite-plugin-node": "^0.6.0",
+		"commander": "^11.0.0",
 		"cosmiconfig": "^8.2.0",
 		"gitlog": "^4.0.8",
 		"glob": "^10.3.3",
@@ -59,6 +63,7 @@
 		"vite": "^4.4.8"
 	},
 	"devDependencies": {
+		"@rollup/plugin-node-resolve": "^15.1.0",
 		"@types/eslint": "^8.37.0",
 		"@types/lodash.merge": "^4.6.7",
 		"@types/node": "^20.4.8",
@@ -96,6 +101,8 @@
 		"sentences-per-line": "^0.2.1",
 		"should-semantic-release": "^0.1.1",
 		"typescript": "^5.0.4",
+		"vite-plugin-dts": "^3.5.1",
+		"vite-plugin-esmodule": "^1.5.0",
 		"vitest": "^0.33.0",
 		"yaml-eslint-parser": "^1.2.2"
 	},

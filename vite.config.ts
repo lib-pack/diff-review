@@ -1,5 +1,6 @@
 // vite.config.js
 import { resolve } from "path";
+import dts from "vite-plugin-dts";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -10,21 +11,36 @@ export default defineConfig({
 			name: "DiffReview",
 			// the proper extensions will be added
 			fileName: "diff-review",
-			formats: ["es", "umd"],
+			formats: ["es", "cjs"],
 		},
+		minify: false,
 		outDir: "lib",
-		// rollupOptions: {
-		// 	// 确保外部化处理那些你不想打包进库的依赖
-		// 	external: ["vue"],
-		// 	output: {
-		// 		// 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
-		// 		globals: {
-		// 			vue: "Vue",
-		// 		},
-		// 	},
-		// },
+		rollupOptions: {
+			// 确保外部化处理那些你不想打包进库的依赖
+			external: [
+				"fs",
+				"child_process",
+				"path",
+				"assert",
+				"util",
+				"os",
+				"events",
+				"stream",
+				"module",
+				"crypto",
+				"url",
+				"openai",
+				"eslint",
+				"gitlog",
+				"lodash.merge",
+				"matcher",
+				"simple-git",
+				"throat",
+			],
+		},
 		sourcemap: true,
 	},
+	plugins: [dts()],
 	test: {
 		clearMocks: true,
 		coverage: {
