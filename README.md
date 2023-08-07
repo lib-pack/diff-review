@@ -38,10 +38,6 @@ pnpm i -g diff-review
 diff-review
 ```
 
-```
-
-```
-
 ### API
 
 ```ts
@@ -51,7 +47,7 @@ console.log(formatReviewResult(await diffReview("develop", "main")));
 // Result
 ```
 
-```json
+```
 
 ## ESLintReviewer
 
