@@ -22,7 +22,7 @@
 	"module": "./lib/diff-review.js",
 	"types": "./lib/src/index.d.ts",
 	"bin": {
-		"diff-review": "./bin/diff-review.js"
+		"diff-review": "./bin/index.js"
 	},
 	"files": [
 		"bin/",
