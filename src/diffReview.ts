@@ -1,4 +1,5 @@
 import { ReviewResult, Reviewer } from "./Reviewer";
+import { findCommonAncestor } from "./findCommonAncestor";
 import { getCurrentBranch } from "./getCurrentBranch";
 import { AiReviewer } from "./reviewer/AiReviewer";
 import { ESLintReviewer } from "./reviewer/ESLintReviewer";
@@ -14,6 +15,8 @@ export async function diffReview(target: string, options: Options) {
 			new AiReviewer(new Gpt(options.aiReviewer.token, options.aiReviewer.api)),
 		);
 	}
+
+	target = findCommonAncestor(current, target) || target;
 
 	return await Reviewer.review(current, target, {
 		cwd: options.cwd ?? process.cwd(),
