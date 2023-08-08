@@ -12,7 +12,13 @@ export async function diffReview(target: string, options: Options) {
 
 	if (options.aiReviewer && options.aiReviewer.enabled !== false) {
 		Reviewer.register(
-			new AiReviewer(new Gpt(options.aiReviewer.token, options.aiReviewer.api)),
+			new AiReviewer(
+				new Gpt(
+					options.aiReviewer.token,
+					options.aiReviewer.api,
+					options.aiReviewer.prompt,
+				),
+			),
 		);
 	}
 

@@ -4,6 +4,7 @@ export interface Options {
 	aiReviewer?: {
 		api: string;
 		enabled?: boolean;
+		prompt?: string;
 		token: string;
 	};
 	cwd?: string;
