@@ -9,7 +9,7 @@ import { RANK_PROMPT } from "./prompt/RANK_PROMPT";
 import { Gpt } from "./reviewer/Gpt";
 
 export async function diffRank(source: string, target: string, options: any) {
-	console.log(source, target, options);
+	// console.log(source, target, options);
 
 	const commits = await gitlogPromise({
 		// author: "Dom Harrington",
@@ -22,7 +22,7 @@ export async function diffRank(source: string, target: string, options: any) {
 		number: 5000,
 	});
 
-	console.log(commits);
+	// console.log(commits);
 
 	const matchCommit = commits.filter((p) => {
 		return (
@@ -42,12 +42,12 @@ export async function diffRank(source: string, target: string, options: any) {
 		return acc;
 	}, {});
 
-	console.log(groupByAuthor);
+	// console.log(groupByAuthor);
 
 	const rankResult = [];
 	for (const author in groupByAuthor) {
 		const commits = groupByAuthor[author];
-		console.log("------------------------");
+		// console.log("------------------------");
 		const result = [];
 		result.push(`## Author: ${author}`);
 		const codes = [];
