@@ -170,7 +170,7 @@ export async function diffRank(source: string, target: string, options: any) {
 					RANK_PROMPT,
 				);
 				const content = "代码片段:\n\n" + md.join("\n");
-				const response = await gpt.run(content, "gpt-4o");
+				const response = await gpt.run(content, options.model);
 
 				const matchJSON = response?.match(/\[[\s\S]*?\]/g);
 
