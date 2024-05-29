@@ -16,7 +16,7 @@ export class Gpt {
 		this.openai = new OpenAIApi(configuration);
 	}
 
-	async run(code: string) {
+	async run(code: string, model = "gpt-3.5-turbo-16k") {
 		const messages = [
 			{
 				content: this.prompt,
@@ -29,8 +29,10 @@ export class Gpt {
 		] as ChatCompletionRequestMessage[];
 		const chatCompletion = await this.openai.createChatCompletion({
 			messages: messages,
-			model: "gpt-3.5-turbo-16k",
+			// model: "gpt-3.5-turbo-16k",
+			// model: "gpt-4o",
 			// model: "gpt-3.5-turbo-0613",
+			model: model,
 			n: 1,
 		});
 

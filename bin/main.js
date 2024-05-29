@@ -1,7 +1,12 @@
 import { Command } from "commander";
 import { cosmiconfig } from "cosmiconfig";
 
-import { diffReview, formatReviewResult, version } from "../lib/diff-review.js";
+import {
+	diffRank,
+	diffReview,
+	formatReviewResult,
+	version,
+} from "../lib/diff-review.js";
 const program = new Command();
 // program.allowUnknownOption(true);
 
@@ -13,19 +18,32 @@ program
 	.version(version);
 
 program
+	.command("review")
 	.argument("[branch]", "diff branch name", "main")
 	.option("-c, --cwd <path>", "current working directory")
 	.option("-p, --patter <glob>", "file pattern")
 	.option("--config <path>", "config path")
-	// 动态参数 option
 	.action(async (target, opts) => {
 		const config = await explorer.search().then((r) => r?.config);
+
 		const dr = await diffReview(
 			target,
 			Object.assign(Object.assign({}, config), opts),
 		);
 		const out = formatReviewResult(dr, opts);
 		console.log(out);
+	});
+
+program
+	.command("rank")
+	.argument("<source>", "diff branch name")
+	.argument("<target>", "diff branch name")
+	.option("-c, --cwd <path>", "current working directory")
+	.option("-p, --patter <glob>", "file pattern")
+	.option("--config <path>", "config path")
+	.action(async (source, target, opts) => {
+		const config = await explorer.search().then((r) => r?.config);
+		diffRank(source, target, Object.assign(Object.assign({}, config), opts));
 	});
 
 // program

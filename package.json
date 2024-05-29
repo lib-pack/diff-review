@@ -54,6 +54,7 @@
 		"commander": "^11.0.0",
 		"cosmiconfig": "^8.2.0",
 		"eslint": "^8.46.0",
+		"espree": "^10.0.1",
 		"gitlog": "^4.0.8",
 		"glob": "^10.3.3",
 		"lodash.merge": "^4.6.2",
