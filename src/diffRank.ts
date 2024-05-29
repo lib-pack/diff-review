@@ -216,7 +216,7 @@ export async function diffRank(source: string, target: string, options: any) {
 			resultRemarks = resultRemarks.filter((r) => {
 				return (
 					r.score !== 0 &&
-					!/缩进|未定义|格式|空格|没有定义|addEvent/.test(r.comment)
+					!/缩进|未定义|格式|空格|没有定义|变量未|addEvent/.test(r.comment)
 				);
 			});
 			const avg =
