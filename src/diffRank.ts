@@ -179,7 +179,9 @@ export async function diffRank(source: string, target: string, options: any) {
 						const json = JSON.parse(cur);
 						acc.push(...json);
 					} catch (error) {
-						console.log(error);
+						console.log("### ERROR ###");
+						console.log(cur);
+						console.log(response);
 					}
 
 					return acc;
