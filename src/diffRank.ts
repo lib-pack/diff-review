@@ -172,16 +172,16 @@ export async function diffRank(source: string, target: string, options: any) {
 				const content = "代码片段:\n\n" + md.join("\n");
 				const response = await gpt.run(content, options.model);
 
-				const matchJSON = response?.match(/\[[\s\S]*?\]/g);
+				const matchJSON = response?.match(/\{[\s\S]+?\}/g);
 
 				const result = matchJSON?.reduce((acc, cur) => {
 					try {
 						const json = JSON.parse(cur);
-						acc.push(...json);
-					} catch (error) {
+						acc.push(json);
+					} catch (e) {
 						console.log("### ERROR ###");
-						console.log(cur);
-						console.log(response);
+						console.log("Current:", cur);
+						console.log("Response:", response);
 					}
 
 					return acc;
